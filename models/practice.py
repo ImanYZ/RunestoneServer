@@ -9,14 +9,22 @@ db.define_table('course_practice',
                 Field('question_points', type='double'),
                 Field('questions_to_complete_day', type='integer'),
                 Field('graded', type='integer'),
-                Field('spacing', type='integer'),
-                Field('interleaving', type='integer'),
+                # Field('spacing', type='integer'),
+                # Field('interleaving', type='integer'),
                 # A value of 0 indicates self-paced (when student marks a page complete).
                 # A value of 1 indicates whenever a page is assigned in any reading assignment and the reading
                 #   assignment deadline passes.
                 # A value of 2 indicates manually by the instructor, as it is implemented currently.
                 Field('flashcard_creation_method', type='integer', default=0),
                 migrate='course_practice.table')
+
+
+db.define_table('user_practice_condition',
+                Field('auth_user_id', 'reference auth_user', label=T('Instructor Name'), required=True, default=1),
+                Field('course_name', 'string'),
+                Field('spacing', type='integer'),
+                Field('interleaving', type='integer'),
+                migrate='user_practice_condition.table')
 
 
 db.define_table('user_topic_practice',
